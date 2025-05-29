@@ -1,0 +1,14 @@
+.navbar{
+    display: flex;
+    justify-content: flex-start;
+    background-color:aquamarine ;
+    padding: 20px;
+    gap: 20px;
+    
+    
+}
+.navbar-child{
+    color: purple;
+    font-size: 20px;
+    text-decoration: none;
+}
