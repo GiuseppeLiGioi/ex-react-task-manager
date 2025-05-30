@@ -1,4 +1,4 @@
-import { GlobalContext } from './context/GlobalContext';
+import  GlobalContextProvider from './context/GlobalContext';
 import AddTask from './assets/components/AddTask';
 import Navbar from './assets/components/Navbar';
 import TaskList from './assets/components/TaskList';
@@ -7,7 +7,7 @@ function App() {
 
 
   return (
-    <GlobalContext>
+    <GlobalContextProvider>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -15,7 +15,7 @@ function App() {
           <Route path='/tasks/new' element={<AddTask />} />
         </Routes>
       </BrowserRouter>
-    </GlobalContext>
+    </GlobalContextProvider>
   )
 }
 
