@@ -12,3 +12,39 @@
     font-size: 20px;
     text-decoration: none;
 }
+
+.task-list-container {
+  padding: 20px;
+}
+
+.task-list-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.task-table {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+
+.task-header {
+  background: #eee;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.task-table td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+.red{
+  background-color: red;
+}
+.green{
+  background-color: green;
+}
+.yellow{
+  background-color: yellow;
+}
+
