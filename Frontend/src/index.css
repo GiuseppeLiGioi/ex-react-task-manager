@@ -47,4 +47,45 @@
 .yellow{
   background-color: yellow;
 }
+.container-form{
+  display: flex;
+  gap: 30px;
+}
+.container-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: sans-serif;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+label {
+  font-weight: bold;
+  margin-top: 8px;
+}
+.error-message{
+  color: red;
+}
 
