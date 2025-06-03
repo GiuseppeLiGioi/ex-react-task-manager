@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react"
+import {Link} from "react-router-dom"
 import { GlobalContext } from "../../context/GlobalContext"
 import TaskRow from "../TaskRow"
 
@@ -27,6 +28,7 @@ export default function TaskList() {
               title={task.title}
               status={task.status}
               createdAt={task.createdAt}
+              id={task.id}
             />
           ))}
         </tbody>

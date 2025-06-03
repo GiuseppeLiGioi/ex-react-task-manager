@@ -1,13 +1,4 @@
-/*
-Modificare la gestione del Submit del Form in AddTask.jsx:
 
-Eseguire la funzione addTask di useTasks(), passando l’oggetto con title, description e status.
-Se la funzione esegue correttamente l'operazione:
-Mostrare un alert di conferma dell’avvenuta creazione della task.
-Resettare il form.
-Se la funzione lancia un errore:
-Mostrare un alert con il messaggio di errore ricevuto.
-*/
 import { GlobalContext } from "../../context/GlobalContext"
 import { useState, useRef, useEffect, useContext } from "react"
 
