@@ -15,15 +15,15 @@ export default function TaskDetail(){
     }
 
     return (
-        <div>
+        <div className="container-details">
             <h2 className="title-single-task">DETTAGLI DELLA TASK: {task.id}</h2>
 
-            <h3>NOME DELLA TASK: {task.title}</h3>
-            <p>DESCRIZIONE DELLA TASK: {task.description}</p>
-            <h4>STATO DELLA TASK: {task.status}</h4>
-            <p>CREAZIONE DELLA TASK: {task.createdAt}</p>
+            <h3 className="single-detail-h">NOME DELLA TASK: {task.title}</h3>
+            <p className="single-detail-p">DESCRIZIONE DELLA TASK: {task.description}</p>
+            <h4 className="single-detail-h">STATO DELLA TASK: {task.status}</h4>
+            <p className="single-detail-p">CREAZIONE DELLA TASK: {task.createdAt}</p>
 
-            <button onClick={() => removeTask(task.id)}>Rimuovi Task</button>
+            <button className="btn-detail" onClick={() => removeTask(task.id)}>Rimuovi Task</button>
             
         </div>
     )
