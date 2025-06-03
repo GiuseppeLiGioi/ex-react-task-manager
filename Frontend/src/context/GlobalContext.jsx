@@ -10,7 +10,8 @@ const {tasks, setTasks, fetchTasks, addTask, removeTask, updateTask} = useTasks(
         <GlobalContext.Provider value={{
            tasks, 
            setTasks,
-           fetchTasks
+           fetchTasks,
+           addTask
 
         }}>
             {children}
