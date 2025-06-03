@@ -1,4 +1,4 @@
-import  GlobalContextProvider from './context/GlobalContext';
+import GlobalContextProvider from './context/GlobalContext';
 import AddTask from './assets/components/AddTask';
 import Navbar from './assets/components/Navbar';
 import TaskList from './assets/components/TaskList';
@@ -8,16 +8,16 @@ function App() {
 
 
   return (
-    <GlobalContextProvider>
-      <BrowserRouter>
+    <BrowserRouter> {/* ho spostato il BrowserRouter più esternamente per consentire l'utilizzo di useNavigate in useTasks.jsx*/ }
+      <GlobalContextProvider>
         <Navbar />
         <Routes>
           <Route path='/' element={<TaskList />} />
           <Route path='/tasks/new' element={<AddTask />} />
           <Route path='/tasks/:id' element={<TaskDetail />} />
         </Routes>
-      </BrowserRouter>
-    </GlobalContextProvider>
+      </GlobalContextProvider>
+    </BrowserRouter>
   )
 }
 

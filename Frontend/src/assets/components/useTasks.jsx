@@ -1,25 +1,11 @@
 /*
-Completare la funzione addTask in useTasks():
-La funzione deve ricevere un oggetto contenente le proprietà title, description e status.
 
-Effettuare una chiamata API POST /tasks, inviando l’oggetto come body in formato JSON.
-
-La chiamata API restituisce un oggetto con la seguente struttura:
-
-In caso di successo:
-
-{ success: true, task:  la task creata  }
-In caso di errore:
-
-{ success: false, message: "Messaggio di errore" }
-La funzione addTask deve controllare il valore di success nella risposta:
-
-Se success è true, aggiornare lo stato globale aggiungendo la nuova task.
-Se success è false, lanciare un errore con message come testo.
 */
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function useTasks() {
     const [tasks, setTasks] = useState([]);
+    const navigate = useNavigate()
 
     async function fetchTasks() {
         try {
@@ -57,8 +43,23 @@ export default function useTasks() {
     }
 
 
-    const removeTask = () => {
-        
+    const removeTask = async (taskId) => {
+         try{
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks/${taskId}`, {
+             method: "DELETE",
+            });
+            const data = await response.json()
+            if(data.success){
+            setTasks((currentTask) => currentTask.filter(cT => cT.id !== taskId) )
+             alert("Eliminazione task avvenuta con successo")
+             navigate('/')
+            }else{
+             throw new Error(data.message) 
+            }
+            
+        } catch(error){
+            alert("Errore durante la rimozione della task", error)
+        }
     }
     const updateTask = () => {
         

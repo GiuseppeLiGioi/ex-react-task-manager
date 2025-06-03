@@ -11,7 +11,8 @@ const {tasks, setTasks, fetchTasks, addTask, removeTask, updateTask} = useTasks(
            tasks, 
            setTasks,
            fetchTasks,
-           addTask
+           addTask,
+           removeTask
 
         }}>
             {children}
