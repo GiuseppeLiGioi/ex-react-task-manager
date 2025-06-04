@@ -41,7 +41,7 @@
 .red{
   background-color: red;
 }
-.green{
+.green {
   background-color: green;
 }
 .yellow{
@@ -195,5 +195,10 @@ label {
   background-color: #e74c3c;
   color: white;
 }
+#btn-detail-update{
+  background-color: green;
+}
+
+
 
 

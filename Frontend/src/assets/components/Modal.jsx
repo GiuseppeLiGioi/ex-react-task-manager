@@ -10,7 +10,7 @@ export default function Modal({title, content, show, onClose, onConfirm}){
         <div  className='container-modal'>
             <div className='container'>
             <h5 className='title-modal'>{title}</h5>
-            <p className='p-modal'>{content}</p>
+            <div className='p-modal'>{content}</div>
             <button onClick={onClose}>Annulla</button>
             <button onClick={onConfirm}>Conferma</button>
              
