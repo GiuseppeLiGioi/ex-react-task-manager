@@ -4,7 +4,7 @@ import useTasks from "../assets/components/useTasks";
 const GlobalContext = createContext()
 
 export default function GlobalContextProvider({children}){
-const {tasks, setTasks, fetchTasks, addTask, removeTask, updateTask} = useTasks()
+const {tasks, setTasks, fetchTasks, addTask, removeTask, updateTask, removeMultipleTasks} = useTasks()
 
     return(
         <GlobalContext.Provider value={{
@@ -13,7 +13,8 @@ const {tasks, setTasks, fetchTasks, addTask, removeTask, updateTask} = useTasks(
            fetchTasks,
            addTask,
            removeTask,
-           updateTask
+           updateTask,
+           removeMultipleTasks
 
         }}>
             {children}

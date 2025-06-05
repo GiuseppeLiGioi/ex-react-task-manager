@@ -87,9 +87,29 @@ export default function useTasks() {
         }
 
     }
+    
 
     const removeMultipleTasks = async(arrId) => {
-
+        const promises = arrId.map((id) => {
+            return fetch (`${import.meta.env.VITE_API_URL}/tasks/${id}`, {method: "DELETE"});
+        })
+        
+     const results = await Promise.allSettled(promises)
+     const idErrati = results.map((r, index) => {
+        if(r.status === "rejected"){
+         arrId[index];
+        }else{
+        return null;
+        }
+     })
+       idErrati.filter((id) => id !== null)  
+       setTasks((currTasks) => {
+        currTasks.filter((ct) => !arrId.includes(ct.id) || idErrati.includes(ct.id))
+        alert("Eliminazione multipla avvenuta con successo")
+       })
+       if(idErrati.length > 0){
+        throw new Error(`Impossibile eliminare le task con ID: ${idErrati.join(",")}`) 
+       }
     }
 
     return { tasks, setTasks, fetchTasks, addTask, removeTask, updateTask, removeMultipleTasks}

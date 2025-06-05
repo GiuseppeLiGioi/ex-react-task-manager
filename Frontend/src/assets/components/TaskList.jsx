@@ -1,5 +1,11 @@
 /*
-
+Gestire l’eliminazione multipla in TaskList.jsx
+Al click su "Elimina Selezionate", chiamare removeMultipleTasks passando selectedTaskIds.
+Se la funzione esegue correttamente l'operazione:
+Mostrare un alert di conferma dell’avvenuta eliminazione multipla.
+Svuotare selectedTaskIds.
+Se la funzione lancia un errore:
+Mostrare un alert con il messaggio di errore ricevuto.
 */
 
 import { useContext, useEffect, useState, useMemo, useCallback, useRef } from "react"
@@ -9,7 +15,7 @@ import debounce from "lodash/debounce";
 
 
 export default function TaskList() {
-  const { tasks, setTasks, fetchTasks } = useContext(GlobalContext)
+  const { tasks, setTasks, fetchTasks, removeMultipleTasks } = useContext(GlobalContext)
   const [sortBy, setSortBy] = useState("createdAt")
   const [sortOrder, setSortOrder] = useState(1)
   const inputRef = useRef();
@@ -71,9 +77,10 @@ export default function TaskList() {
 const toggleSelection= (taskId) => {
   if(selectedTaskIds.includes(taskId)){
    setSelectedTaskIds(selectedTaskIds.filter((id) => id !== taskId))
+  }else{
+    setSelectedTaskIds([...selectedTaskIds, taskId])
   }
   
-  setSelectedTaskIds([selectedTaskIds, taskId])
 }
 
 
@@ -115,13 +122,15 @@ const toggleSelection= (taskId) => {
               task={task}
               createdAt={task.createdAt}
               id={task.id}
+              checked={selectedTaskIds.includes(task.id)} 
+              onToggle={toggleSelection} 
             />
           ))}
         </tbody>
       </table>
       {
         selectedTaskIds.length > 0 && (
-          <button className="btn-selection">Elimina Selezionate</button>
+          <button className="btn-selection" onClick={() => removeMultipleTasks(selectedTaskIds)}>Elimina Selezionate</button>
         )
       }
     </div>
