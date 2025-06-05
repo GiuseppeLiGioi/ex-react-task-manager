@@ -76,7 +76,7 @@ export default function useTasks() {
             });
             const data = await response.json()
             if (!data.success) {
-                
+
                 throw new Error("errore nell' aggiornamento della Task")
             } else {
                 return { success: true, task: data.task }
@@ -87,31 +87,28 @@ export default function useTasks() {
         }
 
     }
-    
 
-    const removeMultipleTasks = async(arrId) => {
+
+    const removeMultipleTasks = async (arrId) => {
         const promises = arrId.map((id) => {
-            return fetch (`${import.meta.env.VITE_API_URL}/tasks/${id}`, {method: "DELETE"});
+            return fetch(`${import.meta.env.VITE_API_URL}/tasks/${id}`, { method: "DELETE" });
         })
-        
-     const results = await Promise.allSettled(promises)
-     const idErrati = results.map((r, index) => {
-        if(r.status === "rejected"){
-         arrId[index];
-        }else{
-        return null;
+
+        const results = await Promise.allSettled(promises)
+        const idErrati = results.map((r, index) => {
+            if (r.status === "rejected") {
+                return arrId[index];
+            }
+            return null;
+        }).filter((id) => id !== null);
+        setTasks((currTasks) =>
+            currTasks.filter((ct) => !arrId.includes(ct.id) || idErrati.includes(ct.id))
+        );
+        if (idErrati.length > 0) {
+            throw new Error(`Impossibile eliminare le task con ID: ${idErrati.join(",")}`)
         }
-     })
-       idErrati.filter((id) => id !== null)  
-       setTasks((currTasks) => {
-        currTasks.filter((ct) => !arrId.includes(ct.id) || idErrati.includes(ct.id))
-        alert("Eliminazione multipla avvenuta con successo")
-       })
-       if(idErrati.length > 0){
-        throw new Error(`Impossibile eliminare le task con ID: ${idErrati.join(",")}`) 
-       }
     }
 
-    return { tasks, setTasks, fetchTasks, addTask, removeTask, updateTask, removeMultipleTasks}
+    return { tasks, setTasks, fetchTasks, addTask, removeTask, updateTask, removeMultipleTasks }
 
 }

@@ -82,15 +82,24 @@ const toggleSelection= (taskId) => {
   }
   
 }
-
+const handleDeleteSelected = async () => {
+  try {
+    await removeMultipleTasks(selectedTaskIds);
+    alert("Task eliminate con successo!");
+    setSelectedTaskIds([]);
+    await fetchTasks();
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
   useEffect(() => {
     fetchTasks()
   }, [])
 
-  useEffect(() => {
-    setFilteredTasks(tasks);
-  }, [tasks]);
+useEffect(() => {
+  setFilteredTasks(Array.isArray(tasks) ? tasks : []);
+}, [tasks]);
 
 
   return (
@@ -100,7 +109,7 @@ const toggleSelection= (taskId) => {
         type="text"
         placeholder="Digita il nome della Task..."
         ref={inputRef}
-        onChange={() => filterLogic()}
+        onChange={ filterLogic}
         className="input-list"
       />
 
@@ -130,7 +139,7 @@ const toggleSelection= (taskId) => {
       </table>
       {
         selectedTaskIds.length > 0 && (
-          <button className="btn-selection" onClick={() => removeMultipleTasks(selectedTaskIds)}>Elimina Selezionate</button>
+          <button className="btn-selection" onClick={handleDeleteSelected}>Elimina Selezionate</button>
         )
       }
     </div>

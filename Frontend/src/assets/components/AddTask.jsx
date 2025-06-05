@@ -23,10 +23,11 @@ export default function AddTask() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+       
         const nuovaTask = {
             title: taskTitle,
             description: inputDesc.current.value,
-            status: inputSelect.current.value
+            status: inputSelect.current.value.trim()
         }
 
 
