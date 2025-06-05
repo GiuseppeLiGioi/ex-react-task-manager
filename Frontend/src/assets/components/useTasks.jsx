@@ -1,20 +1,9 @@
 /*
-Completare la funzione updateTask in useTasks():
-
-La funzione deve ricevere un oggetto updatedTask e effettuare una chiamata API PUT /tasks/:id.
-
-La chiamata API restituisce un oggetto con la seguente struttura:
-
-In caso di successo:
-
-{ success: true, task: /* la task aggiornata  }
-In caso di errore:
-
-{ success: false, message: "Messaggio di errore" }
-La funzione updateTask deve controllare il valore di success nella risposta:
-
-Se success è true, aggiornare la task nello stato globale.
-Se success è false, lanciare un errore con message come testo.
+Implementare la funzione removeMultipleTasks in useTasks.js
+La funzione deve ricevere un array di ID e inviare più richieste DELETE /tasks/{id} in parallelo.
+Utilizzare Promise.allSettled() per gestire successi ed errori senza interrompere il processo.
+Per ogni richiesta che ha successo, la task deve essere rimossa dallo stato locale.
+Se almeno una richiesta fallisce, lanciare un errore con un messaggio che mostra gli ID non eliminati.
 */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -99,6 +88,10 @@ export default function useTasks() {
 
     }
 
-    return { tasks, setTasks, fetchTasks, addTask, removeTask, updateTask }
+    const removeMultipleTasks = async(arrId) => {
+
+    }
+
+    return { tasks, setTasks, fetchTasks, addTask, removeTask, updateTask, removeMultipleTasks}
 
 }

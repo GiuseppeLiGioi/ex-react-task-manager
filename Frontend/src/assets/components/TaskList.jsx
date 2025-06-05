@@ -1,7 +1,5 @@
 /*
-💡 Importante:
-Il debounce non funziona bene sugli input controllati.
-Rimuovere value dall’input, rendendolo non controllato, affinché il debounce possa funzionare correttamente.
+
 */
 
 import { useContext, useEffect, useState, useMemo, useCallback, useRef } from "react"
@@ -16,6 +14,7 @@ export default function TaskList() {
   const [sortOrder, setSortOrder] = useState(1)
   const inputRef = useRef();
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const [selectedTaskIds, setSelectedTaskIds] = useState([]);
 
 
   const sortTask = (e) => {
@@ -29,18 +28,18 @@ export default function TaskList() {
 
   }
 
-const filterLogic = useCallback(
-  debounce(() => {
-    if (!inputRef.current) return;
+  const filterLogic = useCallback(
+    debounce(() => {
+      if (!inputRef.current) return;
 
-    const query = inputRef.current.value.toLowerCase();
-    const filtered = tasks.filter((t) =>
-      t.title.toLowerCase().includes(query)
-    );
-    setFilteredTasks(filtered);
-  }, 500),
-  [tasks]
-);
+      const query = inputRef.current.value.toLowerCase();
+      const filtered = tasks.filter((t) =>
+        t.title.toLowerCase().includes(query)
+      );
+      setFilteredTasks(filtered);
+    }, 500),
+    [tasks]
+  );
 
 
   const sortedTasks = useMemo(() => {
@@ -67,6 +66,15 @@ const filterLogic = useCallback(
     })
     return sorted;
   }, [filteredTasks, sortBy, sortOrder])
+
+
+const toggleSelection= (taskId) => {
+  if(selectedTaskIds.includes(taskId)){
+   setSelectedTaskIds(selectedTaskIds.filter((id) => id !== taskId))
+  }
+  
+  setSelectedTaskIds([selectedTaskIds, taskId])
+}
 
 
   useEffect(() => {
@@ -111,6 +119,11 @@ const filterLogic = useCallback(
           ))}
         </tbody>
       </table>
+      {
+        selectedTaskIds.length > 0 && (
+          <button className="btn-selection">Elimina Selezionate</button>
+        )
+      }
     </div>
 
   )
