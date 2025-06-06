@@ -1,15 +1,14 @@
 /*
-Quando l’utente clicca su "Modifica", si apre la modale con il form precompilato.
-L'onSave di EditTaskModal deve eseguire la funzione updateTask di useTasks(), passando la task modificata.
-Se la funzione esegue correttamente l'operazione:
-Mostrare un alert di conferma dell’avvenuta modifica.
-Chiudere la modale.
-Se la funzione lancia un errore:
-Mostrare un alert con il messaggio di errore ricevuto.
+Usare dayjs per formattare le date in formato italiano (DD/MM/YYYY)
+Installare dayjs con il comando:
+
+npm install dayjs
+Modificare TaskRow.jsx e TaskDetail.jsx per visualizzare la data formattata in formato italiano (DD/MM/YYYY).
 */
 import { useContext, useState } from "react"
 import { useParams } from "react-router-dom"
 import { GlobalContext } from "../../context/GlobalContext"
+import dayjs from 'dayjs'
 import Modal from "./Modal"
 import EditTaskModal from "./EditTaskModal"
 
@@ -19,6 +18,7 @@ export default function TaskDetail() {
     const [modal, setModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const task = tasks.find((t) => t.id === parseInt(id));
+    const formattedDate = dayjs(task.createdAt).format("DD/MM/YYYY");
 
     if (!task) {
         return <p>Task non trovata.</p>
@@ -44,7 +44,7 @@ export default function TaskDetail() {
                 <h3 className="single-detail-h">NOME DELLA TASK: {task.title}</h3>
                 <p className="single-detail-p">DESCRIZIONE DELLA TASK: {task.description}</p>
                 <h4 className="single-detail-h">STATO DELLA TASK: {task.status}</h4>
-                <p className="single-detail-p">CREAZIONE DELLA TASK: {task.createdAt}</p>
+                <p className="single-detail-p">CREAZIONE DELLA TASK: {formattedDate}</p>
 
                 <button className="btn-detail" onClick={() => setModal(true)}>Rimuovi Task</button>
                 <button className="btn-detail" onClick={() => setEditModal(true)}>Modifica Task</button>

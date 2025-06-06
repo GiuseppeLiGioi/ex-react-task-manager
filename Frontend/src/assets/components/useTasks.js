@@ -20,26 +20,32 @@ export default function useTasks() {
         }
     }
 
-    async function addTask(task) {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(task),
-            });
+async function addTask(task) {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(task),
+        });
 
-            const newTask = await response.json();
+        const result = await response.json();
+        console.log("Risposta API addTask:", result);
 
-            if (!newTask.success) {
-                return { success: false, message: "Messaggio di errore" };
-            }
-
-            return { success: true, task: newTask.task };
-        } catch (error) {
-            console.error(error);
-            return { success: false, message: "Errore nella richiesta" };
+        if (!result.success) {
+            console.error("Errore backend:", result.message);
+            return { success: false, message: result.message || "Errore backend" };
         }
+
+        setTasks((prevTasks) => [...prevTasks, result.task]);
+        return { success: true, task: result.task };
+
+    } catch (error) {
+        console.error("Errore nella richiesta:", error);
+        return { success: false, message: "Errore nella richiesta" };
     }
+}
+
+
 
     async function removeTask(taskId) {
         try {
