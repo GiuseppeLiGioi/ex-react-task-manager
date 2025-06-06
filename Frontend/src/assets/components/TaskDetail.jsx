@@ -18,11 +18,11 @@ export default function TaskDetail() {
     const [modal, setModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const task = tasks.find((t) => t.id === parseInt(id));
-    const formattedDate = dayjs(task.createdAt).format("DD/MM/YYYY");
 
     if (!task) {
         return <p>Task non trovata.</p>
     }
+    const formattedDate = dayjs(task.createdAt).format("DD/MM/YYYY");
 
    const handleSave = async (updatedTask) => {
   const result = await updateTask(updatedTask, task.id);
