@@ -10,7 +10,7 @@ Mostrare un alert con il messaggio di errore ricevuto.
 
 import { useContext, useEffect, useState, useMemo, useCallback, useRef } from "react"
 import { GlobalContext } from "../../context/GlobalContext"
-import TaskRow from "../TaskRow"
+import TaskRow from "./TaskRow"
 import debounce from "lodash/debounce";
 
 
