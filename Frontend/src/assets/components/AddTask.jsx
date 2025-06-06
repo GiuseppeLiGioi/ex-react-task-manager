@@ -27,7 +27,7 @@ export default function AddTask() {
         const nuovaTask = {
             title: taskTitle,
             description: inputDesc.current.value,
-            status: inputSelect.current.value.trim()
+            status: inputSelect.current.value
         }
 
 
@@ -84,8 +84,8 @@ export default function AddTask() {
                 />
 
                 <label>Stato:</label>
-                <select ref={inputSelect} defaultValue="To Do" className="form-select">
-                    <option value="To Do">To Do</option>
+                <select ref={inputSelect} defaultValue="To do" className="form-select">
+                    <option value="To do">To Do</option>
                     <option value="Doing">Doing</option>
                     <option value="Done">Done</option>
                 </select>
