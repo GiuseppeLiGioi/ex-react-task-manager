@@ -10,7 +10,7 @@ return (
     <tr>
         <td><Link to={`/tasks/${id}`}>{title}</Link><span><input type="checkbox" checked={checked} onChange={() => onToggle(id)}/></span></td>
         <td className={status === "To do" ? "red" : status === "Doing" ? "yellow" : "green"}>{status}</td>
-        <td>{createdAt}</td>
+        <td>{new Date(createdAt).toLocaleDateString()}</td>
     </tr>
 )
 })
